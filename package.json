@@ -1,5 +1,5 @@
 {
-  "name": "with-typescript",
+  "name": "time-your-shit",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
@@ -10,6 +10,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "next": "latest",
+    "next-redux-saga": "^4.1.2",
+    "next-redux-wrapper": "^6.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.2.1",
@@ -18,10 +20,12 @@
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
+    "@types/next-redux-saga": "^3.0.2",
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.4",
     "@types/react-redux": "^7.1.9",
+    "@types/styled-components": "^5.1.2",
     "@typescript-eslint/eslint-plugin": "3",
     "eslint": "7",
     "eslint-config-standard-with-typescript": "^18.0.2",
@@ -29,8 +33,15 @@
     "eslint-plugin-node": "11",
     "eslint-plugin-promise": "4",
     "eslint-plugin-standard": "4",
+    "redux-devtools-extension": "^2.13.8",
     "standardx": "^5.0.0",
     "typescript": "3.9.7"
   },
-  "license": "ISC"
+  "license": "MIT",
+  "eslintConfig": {
+    "indent": [
+      "error",
+      2
+    ]
+  }
 }
