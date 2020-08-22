@@ -1,16 +1,19 @@
 import { Store } from "redux";
-import { SagaMiddleware } from "redux-saga";
+import { Task } from "redux-saga";
+import { Timer } from "./timer";
 
 export interface ReducerProps {
   type: string;
   payload?: any;
 }
 
-interface SagaTask extends Omit<SagaMiddleware, 'run'> {}
-
 export interface RootStore {}
 
-export type ReduxStoreType = Store<RootStore> & {
+export type ReduxStore = Store<RootStore> & {
   runSagaTask?: () => void
-  sagaTask?: SagaTask
+  sagaTask?: Task
+}
+
+export interface TimersReducerState {
+  timers: Timer[]
 }

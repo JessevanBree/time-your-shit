@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
-
-export const combinedReducers = {}
+import TimersReducer from './TimersReducer'
+export const combinedReducers = {
+  TimersReducer
+}
 
 export default () => combineReducers(combinedReducers)

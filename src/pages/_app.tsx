@@ -1,44 +1,33 @@
-import React, { ReactElement } from 'react'
-import { Provider } from 'react-redux'
-import withRedux from 'next-redux-wrapper'
-import withReduxSaga from 'next-redux-saga'
-
-import { AppProps, AppContext } from 'next/app'
-import { ReduxStoreType } from '@interfaces/store'
-import configureStore from '../store'
+import React from 'react'
+import App, {AppInitialProps, AppContext} from 'next/app';
+import { ReduxStore } from '@interfaces/store'
+import wrapper from '../store'
 import Layout from '@components/Layout'
+import { END } from 'redux-saga';
 
-interface ApplicationProps extends AppProps {
-  store: ReduxStoreType;
+
+class TimeYourShit extends App<AppInitialProps> {
+  public static getInitialProps = async ({Component, ctx}: AppContext) => {
+      const pageProps = { ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}) };
+
+      if (ctx.req) {
+          ctx.store.dispatch(END);
+          await (ctx.store as ReduxStore).sagaTask!.toPromise();
+      }
+
+      return {
+          pageProps,
+      };
+  };
+
+  public render() {
+      const {Component, pageProps} = this.props;
+      return (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      )
+  }
 }
 
-type AppComponent = (props: ApplicationProps) => ReactElement;
-
-type InitialProps = {
-  pageProps: any,
-}
-
-type AppFC = AppComponent & {
-  getInitialProps(
-    nextAppCtx: AppContext
-  ): InitialProps | Promise<InitialProps>
-};
-
-const TimeYourShit: AppFC = ({ Component, pageProps, store }) => {
-  return (
-    <Provider store={store as any}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </Provider>
-  )
-}
-
-TimeYourShit.getInitialProps = async ({ Component, ctx }) => {
-  const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {}
-  return { pageProps }
-}
-
-export default withRedux(configureStore)(
-  withReduxSaga(TimeYourShit)
-)
+export default wrapper.withRedux(TimeYourShit)
