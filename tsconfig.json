@@ -27,6 +27,7 @@
       "@utils/*": ["./src/utils/*"],
       "@interfaces/*": ["./src/interfaces/*"],
       "@store/*": ["./src/store/*"],
+      "@style/*": ["./src/style/*"],
     }
   },
   "exclude": ["node_modules"],

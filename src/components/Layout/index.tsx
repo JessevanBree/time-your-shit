@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import React, { ReactElement } from 'react'
+import Navbar from '@components/Navbar'
 
 const Layout = ({ children }: any): ReactElement => {
   return (
@@ -7,7 +8,8 @@ const Layout = ({ children }: any): ReactElement => {
     <Head>
       <title>Time your shit</title>
     </Head>
-      { children }
+    <Navbar/>
+    { children }
     </>
   )
 }
